@@ -9,11 +9,17 @@
   },
   "dependencies": {
     "babel": "^6.23.0",
+    "babel-cli": "^6.26.0",
+    "babel-polyfill": "^6.26.0",
     "bootstrap": "^4.0.0-beta",
     "deep-freeze": "0.0.1",
     "expect": "^21.2.1",
     "expect-jsx": "^4.0.0",
+    "express": "^4.16.2",
     "firebase": "^4.5.2",
+    "firebase-admin": "^5.4.2",
+    "firebase-functions": "^0.7.1",
+    "isomorphic-fetch": "^2.2.1",
     "jquery": "^3.2.1",
     "js-base64": "^2.3.2",
     "p-map": "^1.2.0",
@@ -27,13 +33,15 @@
     "reactstrap": "^5.0.0-alpha.3",
     "redux": "^3.7.2",
     "save": "^2.3.1",
+    "set-blocking": "^2.0.0",
+    "y18n": "^4.0.0",
     "yarn": "^1.2.1"
   },
   "scripts": {
     "start": "react-scripts start",
     "build": "webpack-dev-server --entry ./src/index.js --output-filename ./build/app.bundle.js ",
     "build:prod": "webpack-dev-server ",
-    "webpack": "webpack",
+    "webpack": "node_modules/.bin/webpack",
     "eject": "react-scripts eject"
   },
   "devDependencies": {
