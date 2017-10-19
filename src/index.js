@@ -7,13 +7,13 @@ import * as firebase from 'firebase';
 import registerServiceWorker from './registerServiceWorker';
 
 var config = {
-    apiKey: "AIzaSyAMdF2h6goO0t5X0O50QpykVPNatpVwbyM",
-    authDomain: "beatnicktech.firebaseapp.com",
-    databaseURL: "https://beatnicktech.firebaseio.com",
-    projectId: "beatnicktech",
-    storageBucket: "beatnicktech.appspot.com",
-    messagingSenderId: "432231058561"
-  };
+      apiKey: "AIzaSyA0VNHCzC7PfP-RQRQVXqijc7rirsZepIE",
+      authDomain: "mbee-7711.firebaseapp.com",
+      databaseURL: "https://mbee-7711.firebaseio.com",
+      projectId: "mbee-7711",
+      storageBucket: "mbee-7711.appspot.com",
+      messagingSenderId: "429954204490"
+    };
   firebase.initializeApp(config);
 
 ReactDOM.render(<App />, document.getElementById('root'));
