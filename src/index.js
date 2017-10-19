@@ -1,9 +1,12 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import * as firebase from 'firebase';
+import React from 'react'
+import { render } from 'react-dom'
+import { Provider } from 'react-redux'
+import configureStore from 'store'
+import Routes from 'routes'
+import 'styles/global-styles'
+import registerServiceWorker from 'utils/registerServiceWorker'
 
+<<<<<<< HEAD
 import registerServiceWorker from './registerServiceWorker';
 
 var config = {
@@ -18,3 +21,12 @@ var config = {
 
 ReactDOM.render(<App />, document.getElementById('root'));
 registerServiceWorker();
+=======
+render(
+  <Provider store={configureStore()}>
+    <Routes />
+  </Provider>,
+  document.getElementById('root')
+)
+registerServiceWorker()
+>>>>>>> new
