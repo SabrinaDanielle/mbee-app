@@ -8,6 +8,7 @@
   "repository": "git@github.com:SabrinaDanielle/mbee-app.git",
   "dependencies": {
     "express": "^4.16.2",
+    "firebase": "^4.6.0",
     "jest-validate": "^21.2.1",
     "material-ui": "^0.19.4",
     "path": "^0.12.7",
