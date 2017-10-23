@@ -1,6 +1,7 @@
 const path = require('path')
 const HtmlWebpackPlugin = require('html-webpack-plugin')
 const FaviconsWebpackPlugin = require('favicons-webpack-plugin')
+const webpack = require('webpack')
 
 const HtmlWebpackPluginConfig = new HtmlWebpackPlugin({
   template: './public/index.html',
@@ -23,16 +24,19 @@ new FaviconsWebpackPlugin({
 })
 
 module.exports = {
-  entry: './src/index.js',
+  devtool: 'eval',
+  entry: ['webpack-dev-server/client?http://localhost:8080', 'webpack/hot/only-dev-server', './src/index.js'],
   output: {
     path: path.resolve(__dirname, 'build'),
     filename: 'app.bundle.js',
   },
+  plugins: [HtmlWebpackPluginConfig, new webpack.HotModuleReplacementPlugin()],
   module: {
     loaders: [
-      { test: /\.js$/, loader: 'babel-loader', exclude: /node_modules/ },
-      { test: /\.jsx$/, loader: 'babel-loader', exclude: /node_modules/ },
+      { test: /\.js$/, loaders: ['react-hot-loader/webpack', 'babel-loader'], exclude: /node_modules/ },
+      { test: /\.jsx$/, loaders: ['react-hot-loader/webpack', 'babel-loader'], exclude: /node_modules/ },
       { test: /\.css$/, use: ['style-loader', 'css-loader'] },
+      { test: /\.css$/, loader: 'style!css' },
       {
         test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
         loader: 'url-loader',
@@ -109,5 +113,4 @@ module.exports = {
       },
     ],
   },
-  plugins: [HtmlWebpackPluginConfig],
 }

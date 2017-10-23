@@ -27,9 +27,9 @@ function Header() {
   return (
     <TopBar>
       <img src={logo} className="redux-logo" alt="logo" />
-      <h2>Welcome to Create Redux App</h2>
+      <h2>Welcome to Create Redux App g</h2>
     </TopBar>
   )
 }
 
-export default Header
+export { Header }

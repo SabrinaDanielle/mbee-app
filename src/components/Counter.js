@@ -11,7 +11,7 @@ function Counter({ increment, incrementIfOdd, decrement, counter }) {
   return (
     <section>
       <Intro>
-        To get started, edit <code>src/routes/index.js </code>
+        To get started be awesome, edit <code>src/routes/index.js </code>
         and save to reload.
       </Intro>
       <p>
