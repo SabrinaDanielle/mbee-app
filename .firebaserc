@@ -1,0 +1,42 @@
+{
+  "projects": {
+    "master": "mbee-7711",
+    "prod": "mbee-7711"
+  },
+  "ci": {
+    "createConfig": {
+      "master": {
+        "version": "${npm_package_version}",
+        "env": "development",
+        "firebase": {
+          "apiKey": "AIzaSyA0VNHCzC7PfP-RQRQVXqijc7rirsZepIE",
+          "authDomain": "mbee-7711.firebaseapp.com",
+          "databaseURL": "https://mbee-7711.firebaseio.com",
+          "projectId": "mbee-7711",
+          "storageBucket": "mbee-7711.appspot.com"
+        },
+        "reduxFirebase": {
+          "userProfile": "users",
+          "enableLogging": false,
+          "updateProfileOnLogin": false
+        }
+      },
+      "prod": {
+        "version": "${npm_package_version}",
+        "env": "production",
+        "firebase": {
+          "apiKey": "AIzaSyA0VNHCzC7PfP-RQRQVXqijc7rirsZepIE",
+          "authDomain": "mbee-7711.firebaseapp.com",
+          "databaseURL": "https://mbee-7711.firebaseio.com",
+          "projectId": "mbee-7711",
+          "storageBucket": "mbee-7711.appspot.com"
+        },
+        "reduxFirebase": {
+          "userProfile": "users",
+          "enableLogging": false,
+          "updateProfileOnLogin": false
+        }
+      }
+    }
+  }
+}

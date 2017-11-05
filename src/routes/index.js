@@ -1,22 +1,44 @@
-import React from 'react'
-import { CounterContainer } from '../containers'
-import { Header } from '../components/Header'
-import { BrowserRouter as Router, Route } from 'react-router-dom'
-import styled from 'styled-components'
+import CoreLayout from '../layouts/CoreLayout'
+import Home from './Home'
+import LoginRoute from './Login'
+import SignupRoute from './Signup'
+import ProjectsRoute from './Projects'
+import AccountRoute from './Account'
+import NotFoundRoute from './NotFound'
 
-const Container = styled.div`
-  text-align: center;
-`
+/*  Note: Instead of using JSX, we recommend using react-router
+    PlainRoute objects to build route definitions.   */
 
-function Routes() {
-  return (
-    <Router>
-      <Container>
-        <Header />
-        <Route path="/" component={CounterContainer} />
-      </Container>
-    </Router>
-  )
-}
+export const createRoutes = (store) => ({
+  path: '/',
+  component: CoreLayout,
+  indexRoute: Home,
+  childRoutes: [
+    AccountRoute(store),
+    LoginRoute(store),
+    SignupRoute(store),
+    ProjectsRoute(store),
+    /* Place all Routes above here so NotFoundRoute can act as a 404 page */
+    NotFoundRoute(store)
+  ]
+})
 
-export default Routes
+/*  Note: childRoutes can be chunked or otherwise loaded programmatically
+    using getChildRoutes with the following signature:
+
+    getChildRoutes (location, cb) {
+      require.ensure([], (require) => {
+        cb(null, [
+          // Remove imports!
+          require('./Counter').default(store)
+        ])
+      })
+    }
+
+    However, this is not necessary for code-splitting! It simply provides
+    an API for async route definitions. Your code splitting should occur
+    inside the route `getComponent` function, since it is only invoked
+    when the route exists and matches.
+*/
+
+export default createRoutes
