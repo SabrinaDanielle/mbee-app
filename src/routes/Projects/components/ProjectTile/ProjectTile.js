@@ -12,18 +12,16 @@ export const ProjectTile = ({ project, onSelect, onDelete, showDelete }) => (
       <span className={classes.name} onClick={() => onSelect(project)}>
         {project.name}
       </span>
-      {showDelete && onDelete
-        ? <IconButton tooltip="delete" onClick={onDelete}>
-            <DeleteIcon />
-          </IconButton>
-        : null}
+      {showDelete && onDelete ? (
+        <IconButton tooltip="delete" onClick={onDelete}>
+          <DeleteIcon />
+        </IconButton>
+      ) : null}
     </div>
     <span className={classes.owner}>
-      {
-        isObject(project.createdBy)
-          ? project.createdBy.displayName
-          : project.createdBy || 'No Owner'
-      }
+      {isObject(project.createdBy)
+        ? project.createdBy.displayName
+        : project.createdBy || 'No Owner'}
     </span>
   </Paper>
 )

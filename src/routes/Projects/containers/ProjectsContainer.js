@@ -2,7 +2,13 @@ import React, { Component } from 'react'
 import PropTypes from 'prop-types'
 import { map } from 'lodash'
 import { connect } from 'react-redux'
-import { firebaseConnect, populatedDataToJS, pathToJS, isLoaded, isEmpty } from 'react-redux-firebase'
+import {
+  firebaseConnect,
+  populatedDataToJS,
+  pathToJS,
+  isLoaded,
+  isEmpty
+} from 'react-redux-firebase'
 import { LIST_PATH } from 'constants'
 import LoadingSpinner from 'components/LoadingSpinner'
 import ProjectTile from '../components/ProjectTile'
@@ -10,16 +16,14 @@ import NewProjectTile from '../components/NewProjectTile'
 import NewProjectDialog from '../components/NewProjectDialog'
 import classes from './ProjectsContainer.scss'
 
-const populates = [
-  { child: 'createdBy', root: 'users' }
-]
+const populates = [{ child: 'createdBy', root: 'users' }]
 
-@firebaseConnect(({ params, auth }) => ([
+@firebaseConnect(({ params, auth }) => [
   {
     path: 'projects',
     populates
   }
-]))
+])
 @connect(({ firebase }, { params }) => ({
   projects: populatedDataToJS(firebase, 'projects', populates),
   auth: pathToJS(firebase, 'auth')
@@ -39,7 +43,7 @@ export default class Projects extends Component {
     newProjectModal: false
   }
 
-  newSubmit = (newProject) => {
+  newSubmit = newProject => {
     const { firebase: { pushWithMeta } } = this.props
     // push new project with createdBy and createdAt
     return pushWithMeta('projects', newProject)
@@ -50,14 +54,13 @@ export default class Projects extends Component {
       })
   }
 
-  deleteProject = ({ name }) =>
-    this.props.firebase.remove(`projects/${name}`)
+  deleteProject = ({ name }) => this.props.firebase.remove(`projects/${name}`)
 
   toggleModal = (name, project) => {
     this.setState({ [`${name}Modal`]: !this.state[`${name}Modal`] })
   }
 
-  render () {
+  render() {
     // Project Route is being loaded
     if (this.props.children) return this.props.children
 
@@ -70,30 +73,25 @@ export default class Projects extends Component {
 
     return (
       <div className={classes.container}>
-        {
-          newProjectModal &&
-            <NewProjectDialog
-              open={newProjectModal}
-              onSubmit={this.newSubmit}
-              onRequestClose={() => this.toggleModal('newProject')}
-            />
-        }
-        <div className={classes.tiles}>
-          <NewProjectTile
-            onClick={() => this.toggleModal('newProject')}
+        {newProjectModal && (
+          <NewProjectDialog
+            open={newProjectModal}
+            onSubmit={this.newSubmit}
+            onRequestClose={() => this.toggleModal('newProject')}
           />
-          {
-            !isEmpty(projects) &&
-               map(projects, (project, key) => (
-                 <ProjectTile
-                   key={`Project-${key}`}
-                   project={project}
-                   onCollabClick={this.collabClick}
-                   onSelect={() => this.context.router.push(`${LIST_PATH}/${key}`)}
-                   onDelete={this.deleteProject}
-                 />
-              ))
-          }
+        )}
+        <div className={classes.tiles}>
+          <NewProjectTile onClick={() => this.toggleModal('newProject')} />
+          {!isEmpty(projects) &&
+            map(projects, (project, key) => (
+              <ProjectTile
+                key={`Project-${key}`}
+                project={project}
+                onCollabClick={this.collabClick}
+                onSelect={() => this.context.router.push(`${LIST_PATH}/${key}`)}
+                onDelete={this.deleteProject}
+              />
+            ))}
         </div>
       </div>
     )

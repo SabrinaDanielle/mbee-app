@@ -32,7 +32,7 @@ export default class Signup extends Component {
     snackCanOpen: false
   }
 
-  handleSignup = (creds) => {
+  handleSignup = creds => {
     this.setState({
       snackCanOpen: true
     })
@@ -40,7 +40,6 @@ export default class Signup extends Component {
       email: creds.email,
       username: creds.username
     })
-
   }
 
   providerLogin = provider => {
@@ -50,9 +49,7 @@ export default class Signup extends Component {
 
     this.props.firebase
       .login({ provider, type: 'popup' })
-      .then(account =>
-        this.context.router.push(LIST_PATH)
-      )
+      .then(account => this.context.router.push(LIST_PATH))
   }
 
   render() {
@@ -64,9 +61,7 @@ export default class Signup extends Component {
         <Paper className={classes.panel}>
           <SignupForm onSubmit={this.handleSignup} />
         </Paper>
-        <div className={classes.or}>
-          or
-        </div>
+        <div className={classes.or}>or</div>
         <div className={classes.providers}>
           <GoogleButton onClick={() => this.providerLogin('google')} />
         </div>
@@ -76,16 +71,17 @@ export default class Signup extends Component {
             Login
           </Link>
         </div>
-        {
-          isLoaded(authError) && !isEmpty(authError) && snackCanOpen &&
+        {isLoaded(authError) &&
+          !isEmpty(authError) &&
+          snackCanOpen && (
             <Snackbar
               open={isLoaded(authError) && !isEmpty(authError) && snackCanOpen}
               message={authError ? authError.message : 'Signup error'}
-              action='close'
+              action="close"
               autoHideDuration={3000}
               onRequestClose={() => this.setState({ snackCanOpen: false })}
             />
-        }
+          )}
       </div>
     )
   }

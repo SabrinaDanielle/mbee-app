@@ -12,32 +12,32 @@ import classes from './LoginForm.scss'
 export const LoginForm = ({ pristine, submitting, handleSubmit }) => (
   <form className={classes.container} onSubmit={handleSubmit}>
     <Field
-      name='email'
+      name="email"
       component={TextField}
-      floatingLabelText='Email'
+      floatingLabelText="Email"
       validate={[required, validateEmail]}
     />
     <Field
-      name='password'
+      name="password"
       component={TextField}
-      floatingLabelText='Password'
-      type='password'
+      floatingLabelText="Password"
+      type="password"
       validate={required}
     />
     <div className={classes.submit}>
       <RaisedButton
         label={submitting ? 'Loading' : 'Login'}
         primary
-        type='submit'
+        type="submit"
         disabled={pristine || submitting}
       />
     </div>
     <div className={classes.options}>
       <div className={classes.remember}>
         <Checkbox
-          name='remember'
-          value='remember'
-          label='Remember'
+          name="remember"
+          value="remember"
+          label="Remember"
           labelStyle={{ fontSize: '.8rem' }}
         />
       </div>
