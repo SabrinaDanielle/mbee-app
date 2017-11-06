@@ -95,7 +95,7 @@ export const UserIsAdmin = UserAuthWrapper({
 export const UserHasPermission = permission =>
   UserAuthWrapper({
     wrapperDisplayName: 'UserHasPermission',
-    LoadingComponent: LoadingScreen,
+    LoadingComponent: CircularProgress,
     allowRedirectBack: false,
     failureRedirectPath: '/login',
     authSelector: ({ firebase: { profile, auth } }) => ({ auth, profile }),
