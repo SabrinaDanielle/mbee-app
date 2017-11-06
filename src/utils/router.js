@@ -3,6 +3,8 @@ import { browserHistory } from 'react-router'
 import { LIST_PATH } from 'constants'
 import { pathToJS } from 'react-redux-firebase'
 import LoadingSpinner from 'components/LoadingSpinner'
+import { get } from 'lodash'
+import CircularProgress from 'material-ui/CircularProgress'
 
 const AUTHED_REDIRECT = 'AUTHED_REDIRECT'
 const UNAUTHED_REDIRECT = 'UNAUTHED_REDIRECT'
@@ -57,6 +59,29 @@ export const UserIsNotAuthenticated = UserAuthWrapper({
     dispatch({ type: AUTHED_REDIRECT })
   }
 })
+
+/**
+ * @description Higher Order Component that redirects to the homepage if
+ * the user does not have the required permission. This HOC requires that the user
+ * profile be loaded and the role property populated
+ * @param {Component} componentToWrap - Component to wrap
+ * @return {Component} wrappedComponent
+ */
+export const UserHasPermission = permission =>
+  UserAuthWrapper({
+    wrapperDisplayName: 'UserHasPermission',
+    LoadingComponent: CircularProgress,
+    allowRedirectBack: false,
+    failureRedirectPath: '/login',
+    authSelector: ({ firebase: { profile, auth } }) => ({ auth, profile }),
+    authenticatingSelector: ({ firebase: { profile, auth, isInitializing } }) =>
+      auth === undefined || profile === undefined || isInitializing === true,
+    predicate: auth => get(auth, `profile.role.${permission}`, false),
+    redirectAction: newLoc => dispatch => {
+      browserHistory.replace(newLoc)
+      dispatch({ type: UNAUTHED_REDIRECT })
+    }
+  })
 
 export default {
   UserIsAuthenticated,
